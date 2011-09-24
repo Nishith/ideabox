@@ -1,4 +1,4 @@
-<%= form_for (@idea) do |f| %>
+<%= form_for(@idea, :remote => true) do |f| %>
     <div id="idea" class="idea">
       <div id="idea_title" class="idea_title">
         <%= f.label :title %><br />

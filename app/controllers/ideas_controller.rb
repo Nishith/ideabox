@@ -3,6 +3,7 @@ class IdeasController < ApplicationController
   def new
     @idea = Idea.new
     @idea.owner = current_user
+
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @idea }
@@ -22,14 +23,18 @@ class IdeasController < ApplicationController
     @idea = Idea.new(params[:idea])
     @idea.owner = current_user.email
     @idea.user_id = current_user
+    @idea.like = 0
+    @idea.dislike = 0
 
     respond_to do |format|
       if @idea.save
         flash[:notice] = 'idea was successfully saved.'
         format.html { redirect_to([@idea]) }
+        format.js
         format.xml  { render :xml => @idea, :status => :created, :location => @idea }
       else
         format.html { render :action => "new" }
+        format.js
         format.xml  { render :xml => @idea.errors, :status => :unprocessable_entity }
       end
     end
@@ -71,6 +76,28 @@ class IdeasController < ApplicationController
     respond_to do |format|
       format.html { redirect_to([@idea]) }
       format.xml  { head :ok }
+    end
+  end
+
+  def like
+    @idea = Idea.find(params[:id])
+    @idea.like = @idea.like + 1
+    @idea.save
+
+    respond_to do |format|
+      format.html { redirect_to([@idea]) }
+      format.xml  { render :xml => @idea }
+    end
+  end
+
+  def dislike
+    @idea = Idea.find(params[:id])
+    @idea.dislike = @idea.dislike + 1
+    @idea.save
+
+    respond_to do |format|
+      format.html { redirect_to([@idea]) }
+      format.xml  { render :xml => @idea }
     end
   end
 

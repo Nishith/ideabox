@@ -2,22 +2,26 @@
 
 <table>
   <% @ideas.each do |idea| %>
-    <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
 
-      <td class="list_description">
-        <dl>
-          <dt><%= idea.title %></dt>
-          <dd><%= truncate(strip_tags(idea.description),
-                 :length => 80) %></dd>
-        </dl>
-      </td>
+        <td class="list_description">
+          <dl>
+            <dt><%= idea.title %></dt>
+            <dd><%= truncate(strip_tags(idea.description),
+                             :length => 80) %></dd>
+          </dl>
+        </td>
 
-      <td class="list_actions">
-        <%= link_to 'Show', idea %><br/>
-        <%= link_to 'Destroy', idea,
-                    :confirm => 'Are you sure?',
-                    :method => :delete %>
-      </td>
-    </tr>
+        <td class="list_actions">
+          <%= link_to 'Like', :controller => "ideas", :id => idea,:action => "like" %><br/>
+          <%= link_to 'Dislike', :controller => "ideas", :id => idea,:action => "dislike" %><br/>
+          <%= link_to 'Show', idea %><br/>
+          <%= link_to 'Destroy', idea,
+                      :confirm => 'Are you sure?',
+                      :method => :delete %>
+        </td>
+      </tr>
   <% end %>
-  </table>
+</table>
+<br />
+<%= link_to "Have an idea?", new_idea_path, :class => "new_idea_button round" %>

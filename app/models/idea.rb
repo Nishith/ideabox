@@ -12,5 +12,7 @@ end
 #  updated_at  :datetime
 #  owner       :text
 #  user_id     :integer
+#  like        :integer
+#  dislike     :integer
 #
 

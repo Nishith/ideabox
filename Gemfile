@@ -9,13 +9,7 @@ gem 'sqlite3'
 
 # For handling users and authentication
 gem 'devise'
-
-# To allow users to comment on the posted ideas
-gem 'acts_as_commentable'
-
-# To allow users to vote on ideas
-gem 'acts_as_votable'
-
+gem 'jquery-rails'
 gem 'will_paginate'
 # Use unicorn as the web server
 # gem 'unicorn'

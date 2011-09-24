@@ -1,12 +1,12 @@
 Ideabox::Application.routes.draw do
 
-  resources :ideas
 
-  get "user/new"
 
-  get "user/index"
+  get "users/new"
 
-  get "user/view"
+  get "users/index"
+
+  get "users/view"
 
   get "ideas/new"
 
@@ -14,13 +14,14 @@ Ideabox::Application.routes.draw do
 
   get "ideas/view"
 
-  get 'home/index'
+  get "ideas/like/"
+
+  get "ideas/dislike"
+  
   #devise_for :views
 
-
-
   devise_for :users
-
+  resources :ideas
   root :to => "ideas#index"
 
   # The priority is based upon order of creation:
