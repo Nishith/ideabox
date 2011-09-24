@@ -24,4 +24,8 @@
   <% end %>
 </table>
 <br />
-<%= link_to "Have an idea?", new_idea_path, :class => "new_idea_button round" %>
+<% if not user_signed_in? %>
+    <%= link_to "Sign up now!", new_user_registration_path, :class => "big_button round" %>
+<% else %>
+    <%= link_to "Have an idea?", new_idea_path, :class => "big_button round" %>
+<% end %>

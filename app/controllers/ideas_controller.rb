@@ -1,5 +1,6 @@
 class IdeasController < ApplicationController
-
+  before_filter :authenticate_user!
+  
   def new
     @idea = Idea.new
     @idea.owner = current_user
