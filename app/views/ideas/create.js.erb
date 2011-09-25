@@ -1,0 +1,8 @@
+/**
+ * Created by JetBrains RubyMine.
+ * User: nishithnand
+ * Date: 9/23/11
+ * Time: 11:21 PM
+ * To change this template use File | Settings | File Templates.
+ */
+$('body').html("<h1><%= escape_javaScript(@post.title) %></h1>").append("<%= escape_javaScript(@post.content) %>");
