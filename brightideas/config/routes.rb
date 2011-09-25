@@ -4,11 +4,11 @@ Brightideas::Application.routes.draw do
 
   devise_for :users
 
-  get "ideas/new"
+#  get "ideas/new"
 
-  get "ideas/index"
+#  get "ideas/index"
 
-  get "ideas/view"
+#  get "ideas/view"
 
   get "ideas/like/"
 

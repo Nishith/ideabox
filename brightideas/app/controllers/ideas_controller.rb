@@ -1,12 +1,10 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
   respond_to :html, :xml, :js
-  
+  helper_method :sort_column, :sort_direction
+
   def new
     @idea = Idea.new
-    @idea.user_id = current_user.id
-    @idea.like = 0
-    @idea.dislike = 0
 
     respond_with(@idea)
   end
@@ -20,6 +18,10 @@ class IdeasController < ApplicationController
 
   def create
     @idea = Idea.new(params[:idea])
+    @idea.user_id = current_user.id
+    @idea.like = 0
+    @idea.dislike = 0
+
     if @idea.save
       flash[:notice] = 'Idea was successfully saved.'
     end
@@ -27,8 +29,8 @@ class IdeasController < ApplicationController
   end
 
   def index
-    @ideas = Idea.order(params[:sort])
-    respond_with(@idea)
+    @ideas = Idea.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
+    respond_with(@ideas)
   end
 
   def edit
@@ -40,7 +42,7 @@ class IdeasController < ApplicationController
     @idea = Idea.find(params[:id])
 
     if @idea.update_attributes(params[:idea])
-        flash[:notice] = 'Idea was successfully updated.'
+      flash[:notice] = 'Idea was successfully updated.'
     end
     respond_with(@idea)
   end
@@ -57,7 +59,7 @@ class IdeasController < ApplicationController
     @idea.like = @idea.like + 1
     @idea.save
 
-    respond_with(@idea)
+    redirect_to ideas_path
   end
 
   def dislike
@@ -65,11 +67,21 @@ class IdeasController < ApplicationController
     @idea.dislike = @idea.dislike + 1
     @idea.save
 
-    respond_with(@idea)
+    redirect_to ideas_path
   end
 
   def credits
     respond_with(@idea)
+  end
+
+  private
+
+  def sort_column
+    Idea.column_names.include?(params[:sort]) ? params[:sort] : "like"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
 end
 

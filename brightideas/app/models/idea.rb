@@ -1,6 +1,14 @@
 class Idea < ActiveRecord::Base
   validates :title, :description, :presence => true
   validates :title, :uniqueness => true
+
+  def self.search(search)
+    if search
+      where('title LIKE ?', "%#{search}%")
+    else
+      scoped
+    end
+  end
 end
 # == Schema Information
 #

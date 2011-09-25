@@ -1,0 +1,32 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+<table>
+  <tr>
+    <th><%= sortable "idea", "Ideas" %></th>
+    <th><%= sortable "like", "Likes" %></th>
+    <th><%= sortable "dislike", "Dislikes" %></th>
+    <th><%= sortable "created_at","Submitted At",  %></th>
+  </tr>
+  <% @ideas.each do |idea| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+        <td class="list_description">
+          <dl>
+            <dt><%= idea.title %></dt>
+            <dd><%= truncate(strip_tags(idea.description),
+                             :length => 80) %></dd>
+            <%= link_to 'Like', :controller => "ideas", :id => idea,:action => "like" %>
+            <%= link_to 'Dislike', :controller => "ideas", :id => idea,:action => "dislike" %>
+            <%= link_to 'Show', idea %>
+            <%= link_to 'Destroy', idea,
+                        :confirm => 'Are you sure?',
+                        :method => :delete %>
+          </dl>
+        </td>
+        <td><%= idea.like %></td>
+        <td><%= idea.dislike %></td>
+        <td><%= idea.created_at %></td>
+      </tr>
+  <% end %>
+</table>
+<%= will_paginate @ideas %>
