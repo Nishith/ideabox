@@ -1,0 +1,37 @@
+<h1>All Ideas</h1>
+
+<table>
+  <tr>
+    <th><% link_to 'Ideas', :sort => "title" %></th>
+    <th><%= link_to "Likes", :sort => "like" %></th>
+    <th><%= link_to "Dislikes", :sort => "dislike" %></th>
+    <th><%= link_to "Submitted At", :sort => "created_at" %></th>
+  </tr>
+  <% @ideas.each do |idea| %>
+      <tr class="<%= cycle('list_line_odd', 'list_line_even') %>">
+
+        <td class="list_description">
+          <dl>
+            <dt><%= idea.title %></dt>
+            <dd><%= truncate(strip_tags(idea.description),
+                             :length => 80) %></dd>
+            <%= link_to 'Like', :controller => "ideas", :id => idea,:action => "like" %>
+            <%= link_to 'Dislike', :controller => "ideas", :id => idea,:action => "dislike" %>
+            <%= link_to 'Show', idea %>
+            <%= link_to 'Destroy', idea,
+                        :confirm => 'Are you sure?',
+                        :method => :delete %>
+          </dl>
+        </td>
+        <td><%= idea.like %></td>
+        <td><%= idea.dislike %></td>
+        <td><%= idea.created_at %></td>
+      </tr>
+  <% end %>
+</table>
+<br />
+<% if not user_signed_in? %>
+    <%= link_to "Sign up now!", new_user_registration_path, :class => "big_button round" %>
+<% else %>
+    <%= link_to "Have an idea?", new_idea_path, :class => "big_button round" %>
+<% end %>

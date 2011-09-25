@@ -1,0 +1,13 @@
+<%= form_for(@idea, :remote => true) do |f| %>
+    <div id="idea" class="idea">
+      <div id="idea_title" class="idea_title">
+        <%= f.label :title %><br />
+        <%= f.text_field :title, :size => "100" %>
+      </div>
+      <div id="idea_description" class="idea_description">
+        <%= f.label :description %><br />
+        <%= f.text_area :description, :cols => "100", :rows => "5" %>
+      </div>
+      <%= f.submit "Save Idea" %>
+    </div>
+<% end %>
