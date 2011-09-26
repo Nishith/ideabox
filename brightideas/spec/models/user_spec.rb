@@ -1,7 +1,33 @@
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+
+  it "can be created" do
+    lambda {
+      Factory(:users)
+    }.should change(User, :count).by(1)
+  end
+
+  it "should not be valid without a name" do
+    subject.should_not be_valid
+    subject.errors[:name].should_not be_empty
+  end
+
+  it "should not be valid without an about me" do
+    subject.should_not be_valid
+    subject.errors[:about].should_not be_empty
+  end
+
+  it "should not be valid without an email" do
+    subject.should_not be_valid
+    subject.errors[:email].should_not be_empty
+  end
+
+  it "should not be valid without a password" do
+    subject.should_not be_valid
+    subject.errors[:password].should_not be_empty
+  end
+
 end
 # == Schema Information
 #

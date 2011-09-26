@@ -4,15 +4,19 @@ Brightideas::Application.routes.draw do
 
   devise_for :users
 
-#  get "ideas/new"
+  get "ideas/new"
 
-#  get "ideas/index"
+  get "ideas/index"
 
-#  get "ideas/view"
+  get "ideas/view"
 
-  get "ideas/like/"
+  get "ideas/like"
 
   get "ideas/dislike"
+
+  get "ideas/edit"
+
+  get "ideas/update"
 
   match 'credits' => 'ideas#credits', :as => :credits
   

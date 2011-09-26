@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe UserController do
+describe UsersController do
 
   describe "GET 'view'" do
     it "should be successful" do
-      get 'view'
+      get 'view', {:id => '1'}
       response.should be_success
     end
   end

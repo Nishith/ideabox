@@ -12,6 +12,8 @@ gem 'rspec-rails'
 gem 'annotate', :git => 'git://github.com/ctran/annotate_models.git'
 gem 'will_paginate'
 
+gem "factory_girl_rails"
+gem 'webrat'
 # Use unicorn as the web server
 # gem 'unicorn'
 

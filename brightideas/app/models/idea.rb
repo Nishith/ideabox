@@ -1,6 +1,10 @@
 class Idea < ActiveRecord::Base
   validates :title, :description, :presence => true
   validates :title, :uniqueness => true
+  validates :like, :numericality => {:greater_than => -1}
+  validates :dislike, :numericality => {:greater_than => -1}
+
+  belongs_to :user
 
   def self.search(search)
     if search

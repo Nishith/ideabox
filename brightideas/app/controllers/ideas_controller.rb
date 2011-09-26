@@ -1,10 +1,11 @@
 class IdeasController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
-  respond_to :html, :xml, :js
+  respond_to :html, :xml
   helper_method :sort_column, :sort_direction
 
   def new
     @idea = Idea.new
+    @title = "New Idea"
 
     respond_with(@idea)
   end
@@ -12,6 +13,7 @@ class IdeasController < ApplicationController
   def show
     @idea = Idea.find(params[:id])
     @owner = User.find(@idea.user_id)
+    @title = "Show Idea"
 
     respond_with(@idea)
   end
@@ -21,25 +23,31 @@ class IdeasController < ApplicationController
     @idea.user_id = current_user.id
     @idea.like = 0
     @idea.dislike = 0
+    @title = "Create a new idea"
 
     if @idea.save
       flash[:notice] = 'Idea was successfully saved.'
+    else
+      render :action => :new
     end
     respond_with(@idea)
   end
 
   def index
     @ideas = Idea.search(params[:search]).order(sort_column + " " + sort_direction).paginate(:per_page => 5, :page => params[:page])
+    @title = "All Ideas"
     respond_with(@ideas)
   end
 
   def edit
     @idea ||= Idea.find(params[:id])
+    @title = "Edit"
     respond_with(@idea)
   end
 
   def update
     @idea = Idea.find(params[:id])
+    @title = "Update"
 
     if @idea.update_attributes(params[:idea])
       flash[:notice] = 'Idea was successfully updated.'
@@ -71,6 +79,7 @@ class IdeasController < ApplicationController
   end
 
   def credits
+    @title = "Credits"
     respond_with(@idea)
   end
 

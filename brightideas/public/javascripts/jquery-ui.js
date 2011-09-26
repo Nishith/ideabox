@@ -277,7 +277,7 @@ $.extend( $.ui, {
 	// only used by resizable
 	hasScroll: function( el, a ) {
 	
-		//If overflow is hidden, the element might have extra content, but the user wants to hide it
+		//If overflow is hidden, the element might have extra content, but the users wants to hide it
 		if ( $( el ).css( "overflow" ) === "hidden") {
 			return false;
 		}
@@ -2146,7 +2146,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 		// Calculate the attrs that will be change
 		var data = trigger.apply(this, [event, dx, dy]), ie6 = $.browser.msie && $.browser.version < 7, csdif = this.sizeDiff;
 
-		// Put this in the mouseDrag handler since the user can start pressing shift while resizing
+		// Put this in the mouseDrag handler since the users can start pressing shift while resizing
 		this._updateVirtualBoundaries(event.shiftKey);
 		if (this._aspectRatio || event.shiftKey)
 			data = this._updateRatio(data, event);
@@ -2166,7 +2166,7 @@ $.widget("ui.resizable", $.ui.mouse, {
 
 		this._updateCache(data);
 
-		// calling the user callback at the end
+		// calling the users callback at the end
 		this._trigger('resize', event, this.ui());
 
 		return false;
@@ -3944,7 +3944,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 		var delayedTriggers = [], self = this;
 
 		// We first have to update the dom position of the actual currentItem
-		// Note: don't do it if the current item is already removed (by a user), or it gets reappended (see #4088)
+		// Note: don't do it if the current item is already removed (by a users), or it gets reappended (see #4088)
 		if(!this._noFinalSort && this.currentItem.parent().length) this.placeholder.before(this.currentItem);
 		this._noFinalSort = null;
 
@@ -6366,7 +6366,7 @@ $.widget( "ui.autocomplete", {
 				// clicking on the scrollbar causes focus to shift to the body
 				// but we can't detect a mouseup or a click immediately afterward
 				// so we have to track the next mousedown and close the menu if
-				// the user clicks somewhere outside of the autocomplete
+				// the users clicks somewhere outside of the autocomplete
 				var menuElement = self.menu.element[ 0 ];
 				if ( !$( event.target ).closest( ".ui-menu-item" ).length ) {
 					setTimeout(function() {
@@ -7376,7 +7376,7 @@ $.extend(Datepicker.prototype, {
 			console.log.apply('', arguments);
 	},
 	
-	// TODO rename to "widget" when switching to widget factory
+	// TODO rename to "widget" when switching to widget factories
 	_widgetDatepicker: function() {
 		return this.dpDiv;
 	},
@@ -8775,7 +8775,7 @@ $.extend(Datepicker.prototype, {
 						tbody += '<td class="' +
 							((dow + firstDay + 6) % 7 >= 5 ? ' ui-datepicker-week-end' : '') + // highlight weekends
 							(otherMonth ? ' ui-datepicker-other-month' : '') + // highlight days from other months
-							((printDate.getTime() == selectedDate.getTime() && drawMonth == inst.selectedMonth && inst._keyEvent) || // user pressed key
+							((printDate.getTime() == selectedDate.getTime() && drawMonth == inst.selectedMonth && inst._keyEvent) || // users pressed key
 							(defaultDate.getTime() == printDate.getTime() && defaultDate.getTime() == selectedDate.getTime()) ?
 							// or defaultDate is current printedDate and defaultDate is selectedDate
 							' ' + this._dayOverClass : '') + // highlight selected day
@@ -9714,7 +9714,7 @@ $.widget("ui.dialog", {
 	},
 
 	_size: function() {
-		/* If the user has resized the dialog, the .ui-dialog and .ui-dialog-content
+		/* If the users has resized the dialog, the .ui-dialog and .ui-dialog-content
 		 * divs will both have width and height set, so we need to reset them
 		 */
 		var options = this.options,
@@ -9912,9 +9912,9 @@ $.extend($.ui.dialog.overlay, {
 	},
 
 	resize: function() {
-		/* If the dialog is draggable and the user drags it past the
+		/* If the dialog is draggable and the users drags it past the
 		 * right edge of the window, the document becomes wider so we
-		 * need to stretch the overlay. If the user then drags the
+		 * need to stretch the overlay. If the users then drags the
 		 * dialog back to the left, the document will become narrower,
 		 * so we need to shrink the overlay to the appropriate size.
 		 * This is handled by shrinking the overlay before setting it
@@ -11623,7 +11623,7 @@ $.widget( "ui.tabs", {
 				self._trigger( "load", null, self._ui( self.anchors[ index ], self.panels[ index ] ) );
 				try {
 					// Passing index avoid a race condition when this method is
-					// called after the user has selected another tab.
+					// called after the users has selected another tab.
 					// Pass the anchor that initiated this request allows
 					// loadError to manipulate the tab content panel via $(a.hash)
 					o.ajaxOptions.error( xhr, s, index, a );
